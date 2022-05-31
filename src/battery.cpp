@@ -9,13 +9,17 @@ using namespace std;
 
 
 void Battery::attachMoto(Moto moto){    // Attach a motorcycle as the battery's host
-    hostAttached = "Moto";
-    host.moto = moto;
+    if(hostAttached == "None"){
+        hostAttached = "Moto";
+        host.moto = moto;
+    }
 }
 
 void Battery::attachETB(ETB etb){       // Attach an ETB as the battery's host
-    hostAttached = "ETB";
-    host.etb = etb;
+    if(hostAttached == "None"){
+        hostAttached = "ETB";
+        host.etb = etb;
+    }
 }
 
 void Battery::detachHost(){     // Detach the host of the battery
@@ -35,6 +39,7 @@ host_t * Battery::getHost(){    // Returns a pointer to the battery's host
         return (host_t *) &(host.moto);
     else if(hostAttached == "ETB")
         return (host_t *) &(host.etb);
+    else return 0;
 }
 
 void Battery::updateSoc(){      // Iterate one second in the simulation

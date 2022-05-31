@@ -33,6 +33,13 @@ class Battery{
         host_t * getHost();
 
         void updateSoc();
+
+        void operator = (const Battery &B){
+            uid = B.uid;
+            soc = B.soc;
+            host = B.host;
+            hostAttached = B.hostAttached;
+        }
 };
 
 #endif

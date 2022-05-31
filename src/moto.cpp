@@ -18,10 +18,12 @@ void Moto::turnOff(){   // Turn the motorcycle off
 void Moto::attachBattery(Battery batteryToAttach){  // Attach a battery to the motorcycle
     battery = batteryToAttach;
     batteryAttached = true;
+    // TODO: alterar o estado da bateria para Attached
 }
 
 void Moto::detachBattery(){     // Detach the battery of the motorcycle
     batteryAttached = false;
+    // TODO: alterar o estado da bateria para Idle
 }
 
 void Moto::throttle(){  // Turn on the motorcycle's throttle
