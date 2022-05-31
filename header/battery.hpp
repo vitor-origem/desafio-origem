@@ -6,6 +6,8 @@
 #include <string>
 
 #include "../header/moto.hpp"
+#include "../header/battery.hpp"
+#include "../header/cp.hpp"
 #include "../header/etb.hpp"
 
 using namespace std;
@@ -13,6 +15,9 @@ using namespace std;
 union host_t{   // Host type (can either be a motorcycle or an ETB)
     Moto moto;
     ETB etb;
+    string name;
+    host_t(){name = "None";}
+    ~host_t(){}
 };
 
 class Battery{
@@ -24,6 +29,9 @@ class Battery{
         string hostAttached;    // Indicates if there is a host attached
 
     public:
+        Battery();
+        Battery(long long int uid, float soc);
+
         void attachMoto(Moto moto);
         void attachETB(ETB etb);
         void detachHost();

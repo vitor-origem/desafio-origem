@@ -7,7 +7,18 @@
 
 using namespace std;
 
-void CP::attachBaterry(Battery * batteryToAttach){
+CP::CP(){
+    charging = false;
+    batteryAttached = false;
+}
+
+CP::CP(Battery * newBattery){
+    attachBattery(newBattery);
+    charging = false;
+    batteryAttached = false;
+}
+
+void CP::attachBattery(Battery * batteryToAttach){
     if(!batteryAttached){
         battery = *batteryToAttach;
         batteryAttached = true;
@@ -26,8 +37,11 @@ void CP::stopCharge(){
     charging = false;
 }
 
-bool CP::getCharging(){
-    return charging;
+string CP::getCharging(){
+    if(charging)
+        return "YES";
+    else
+        return "NO";
 }
 
 bool CP::getBatteryAttached(){

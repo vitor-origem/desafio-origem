@@ -1,11 +1,16 @@
 #include <iostream>
 #include <string>
 
-#include "../header/battery.hpp"
 #include "../header/moto.hpp"
+#include "../header/battery.hpp"
+#include "../header/cp.hpp"
+#include "../header/etb.hpp"
 
 using namespace std;
 
+Moto::Moto(string newPlate){
+    plate = plate;
+}
 
 void Moto::turnOn(){    // Turn the motorcycle on
     state = "On";
@@ -15,10 +20,11 @@ void Moto::turnOff(){   // Turn the motorcycle off
     state = "Standby";
 }
 
-void Moto::attachBattery(Battery batteryToAttach){  // Attach a battery to the motorcycle
-    battery = batteryToAttach;
-    batteryAttached = true;
-    // TODO: alterar o estado da bateria para Attached
+void Moto::attachBattery(Battery * batteryToAttach){
+    if(!batteryAttached){
+        battery = *batteryToAttach;
+        batteryAttached = true;
+    }
 }
 
 void Moto::detachBattery(){     // Detach the battery of the motorcycle
@@ -48,12 +54,16 @@ float Moto::getSpeed(){     // Get the speed of the motorcycle
     return speed;
 }
 
-long long int Moto::getBattery(){   // Get the attached battery's UID
-    return battery.getUid();
+Battery * Moto::getBattery(){   // Get the attached battery's UID
+    return &battery;
 }
 
 string Moto::getState(){    // Get the state of the motorcycle
     return state;
+}
+
+bool Moto::getBatteryAttached(){
+    return batteryAttached;
 }
 
 void Moto::increaseSpeed(){     // Increase the motorcycle's speed

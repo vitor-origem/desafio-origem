@@ -2,11 +2,26 @@
 #include <string>
 #include <cmath>
 
-#include "../header/battery.hpp"
 #include "../header/moto.hpp"
+#include "../header/battery.hpp"
+#include "../header/cp.hpp"
+#include "../header/etb.hpp"
 
 using namespace std;
 
+Battery::Battery(){
+    uid = 0;
+    soc = 0;
+    hostAttached = "None";
+    host.name = "None";
+}
+
+Battery::Battery(long long int newUid, float newSoc){
+    uid = newUid;
+    soc = newSoc;
+    hostAttached = "None";
+    host.name = "None";
+}
 
 void Battery::attachMoto(Moto moto){    // Attach a motorcycle as the battery's host
     if(hostAttached == "None"){

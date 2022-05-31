@@ -19,6 +19,8 @@ class ETB{
         long int uid;
         vector<CP> cps;
     public:
+        ETB(long int newUid, int numCps);
+
         void attachBatteryToCp(Battery * battery, int numCp);
         void startChargeCp(int numCp);
         void stopChargeCp(int numCp);

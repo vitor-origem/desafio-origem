@@ -7,7 +7,10 @@
 #include <iostream>
 #include <string>
 
+#include "../header/moto.hpp"
 #include "../header/battery.hpp"
+#include "../header/cp.hpp"
+#include "../header/etb.hpp"
 
 using namespace std;
 
@@ -23,9 +26,11 @@ class Moto{
         bool throttleOn;        // Indicates if the throttle is being pressed
 
     public:
+        Moto(string plate);
+        
         void turnOn();
         void turnOff();
-        void attachBattery(Battery batteryToAttach);
+        void attachBattery(Battery * batteryToAttach);
         void detachBattery();
         void throttle();
         void brake();
@@ -34,7 +39,8 @@ class Moto{
         string getState();
         string getPlate();
         float getSpeed();
-        long long int Moto::getBattery();
+        Battery * Moto::getBattery();
+        bool getBatteryAttached();
 
         void increaseSpeed();
         void reduceSpeed();

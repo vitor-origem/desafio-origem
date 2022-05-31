@@ -3,11 +3,18 @@
 #include <vector>
 
 #include "../header/moto.hpp"
-#include "../header/etb.hpp"
+#include "../header/battery.hpp"
 #include "../header/cp.hpp"
 #include "../header/etb.hpp"
 
 using namespace std;
+
+ETB::ETB(long int newUid, int numCps){
+    uid = newUid;
+    
+    for(int i = 0; i < numCps; i++)
+        cps.push_back(CP());
+}
 
 int ETB::getNumBatteries(){
     int numBatteries = 0;
@@ -22,13 +29,13 @@ int ETB::getNumCharging(){
     int numCharging = 0;
 
     for(auto cp = cps.begin(); cp != cps.end(); ++cp){
-        if((*cp).getCharging())
+        if((*cp).getCharging() == "YES")
             numCharging++;
     }
 }
 
 void ETB::attachBatteryToCp(Battery * battery, int numCp){
-    cps.at(numCp).attachBaterry(battery);
+    cps.at(numCp-1).attachBattery(battery);
 }
 
 void ETB::startChargeCp(int numCp){
