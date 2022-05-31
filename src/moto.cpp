@@ -1,80 +1,77 @@
 #include <iostream>
 #include <string>
-#include <format>
 
 #include "../header/battery.hpp"
 #include "../header/moto.hpp"
 
 using namespace std;
 
-#define MAX_SPEED 60
 
-
-void Moto::turnOn(){
+void Moto::turnOn(){    // Turn the motorcycle on
     state = "On";
 }
 
-void Moto::turnOff(){
+void Moto::turnOff(){   // Turn the motorcycle off
     state = "Standby";
 }
 
-void Moto::attachBattery(Battery batteryToAttach){
+void Moto::attachBattery(Battery batteryToAttach){  // Attach a battery to the motorcycle
     battery = batteryToAttach;
-    hasBattery = true;
+    batteryAttached = true;
 }
 
-void Moto::detachBattery(Battery batteryToDetach){
-    hasBattery = false;
+void Moto::detachBattery(){     // Detach the battery of the motorcycle
+    batteryAttached = false;
 }
 
-void Moto::throttle(){
+void Moto::throttle(){  // Turn on the motorcycle's throttle
     if(!brakeOn)
         throttleOn = true;
 }
 
-void Moto::brake(){
-    throttleOn = false;
+void Moto::brake(){         // Turn on the motorcycle's brakes
+    throttleOn = false;     // Turning the brakes on blocks the throttle
     brakeOn = true;
 }
 
-void Moto::freeBrake(){
+void Moto::releaseBrake(){  // Release the motorcycle's brakes
     brakeOn = false;
 }
 
-string Moto::getPlate(){
+string Moto::getPlate(){    // Get the plate number of the motorcycle
     return plate;
 }
 
-float Moto::getSpeed(){
+float Moto::getSpeed(){     // Get the speed of the motorcycle
     return speed;
 }
 
-long long int Moto::getBattery(){
+long long int Moto::getBattery(){   // Get the attached battery's UID
     return battery.getUid();
 }
 
-string Moto::getState(){
+string Moto::getState(){    // Get the state of the motorcycle
     return state;
 }
 
-void Moto::increaseSpeed(){
+void Moto::increaseSpeed(){     // Increase the motorcycle's speed
     speed += 0.2;
 
     if(speed > MAX_SPEED)
         speed = MAX_SPEED;
 }
 
-void Moto::reduceSpeed(){
+void Moto::reduceSpeed(){       // Decrease the motorcycle's speed
     speed -= 2;
 
     if(speed < 0)
         speed = 0;
 }
 
-void Moto::iterTime(){
+void Moto::updateSpeed(){     // Iterate one second in the simulation
     if(brakeOn){
         reduceSpeed();
     }else if(throttleOn){
         increaseSpeed();
-    }
+    }   // If neither brake or throttle are on, the speed stays the same
 }

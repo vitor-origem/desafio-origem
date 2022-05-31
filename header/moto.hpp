@@ -2,6 +2,8 @@
 
 #define MOTO_H
 
+#define MAX_SPEED 60    // Definition of the maximum speed of the motorcycle
+
 #include <iostream>
 #include <string>
 
@@ -11,23 +13,23 @@ using namespace std;
 
 class Moto{
     private:
-        string plate;
+        string plate;       // "Unique" id of the motorcycle
         float speed;
         Battery battery;
 
-        string state;
-        bool hasBattery;
-        bool brakeOn;
-        bool throttleOn;
+        string state;           // Indicates if the motorcycle is on or standby
+        bool batteryAttached;   // Indicates if there is any battery attached to the motorcycle
+        bool brakeOn;           // Indicates if the brakes are being pressed
+        bool throttleOn;        // Indicates if the throttle is being pressed
 
     public:
         void turnOn();
         void turnOff();
         void attachBattery(Battery batteryToAttach);
-        void detachBattery(Battery batteryToDetach);
+        void detachBattery();
         void throttle();
         void brake();
-        void freeBrake();
+        void releaseBrake();
 
         string getState();
         string getPlate();
@@ -37,7 +39,7 @@ class Moto{
         void increaseSpeed();
         void reduceSpeed();
 
-        void iterTime();
+        void updateSpeed();
 };
 
 #endif

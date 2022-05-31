@@ -10,18 +10,29 @@
 
 using namespace std;
 
-union host_t{
+union host_t{   // Host type (can either be a motorcycle or an ETB)
     Moto moto;
     ETB etb;
 };
 
 class Battery{
-    long long int uid;
-    float soc;
-    host_t host;
+    private:
+        long long int uid;
+        float soc;
+        host_t host;
+
+        string hostAttached;    // Indicates if there is a host attached
 
     public:
+        void attachMoto(Moto moto);
+        void attachETB(ETB etb);
+        void detachHost();
+
         long long int getUid();
+        float getSoc();
+        host_t * getHost();
+
+        void updateSoc();
 };
 
 #endif
