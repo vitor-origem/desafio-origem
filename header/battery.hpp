@@ -37,7 +37,10 @@ class Battery{
         void operator = (const Battery &B){
             uid = B.uid;
             soc = B.soc;
-            host = B.host;
+            if(hostAttached == "Moto")
+                host.etb = B.host.etb;
+            else if(hostAttached == "ETB")
+                host.moto = B.host.moto;
             hostAttached = B.hostAttached;
         }
 };

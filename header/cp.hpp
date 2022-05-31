@@ -17,10 +17,14 @@ class CP{
         bool batteryAttached;
 
     public:
-        void attachBaterry(Battery batteryToAttach);
+        void attachBaterry(Battery * batteryToAttach);
         void detachBattery();
         void startCharge();
         void stopCharge();
+
+        bool getCharging();
+        bool getBatteryAttached();
+        Battery * getBattery();
 };
 
 #endif
