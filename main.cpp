@@ -8,8 +8,7 @@
 #include "header/moto.hpp"
 #include "header/etb.hpp"
 
-// TODO: quando finalizar o carregamento de uma bateria deve-se automaticamente
-// desligar o charging do CP e outras condições
+#define PRINT_INTERVAL 10
 
 using namespace std;
 
@@ -23,7 +22,7 @@ Battery batMoto(1000, 85);
 Battery bat1(1001, 100), bat2(1002, 100), bat3(1003, 100);
 Battery bat4(1004, 70),  bat5(1005, 60),  bat6(1006, 50);
 
-Moto motoboy("Motoboy123456");
+Moto motoboy("123456789");
 
 ETB etb(123, 7);
 
@@ -31,15 +30,48 @@ int totalTimeInSeconds = 0;
 
 int main(){
     setupSimulation();
-    runSimulation(50);
+
+    motoboy.turnOn();
+
+    for(int cycle = 0; cycle < 6; cycle++){
+        motoboy.releaseBrake();
+        motoboy.throttle();
+        runSimulation(180);
+        motoboy.brake();
+        runSimulation(10);
+    }
+
+    for(int cycle = 0; cycle < 4; cycle++){
+        motoboy.releaseBrake();
+        motoboy.throttle();
+        runSimulation(120);
+        motoboy.brake();
+        runSimulation(12);
+    }
+
+    motoboy.releaseBrake();
+    motoboy.throttle();
+    runSimulation(100);
+    motoboy.brake();
+    runSimulation(32);    
+
+    motoboy.turnOff();
+    motoboy.detachBattery();
+    etb.attachBatteryToCp(&batMoto, 7);
+
+    runSimulation(10);
+
+    etb.detachBatteryFromCp(1);
+    motoboy.attachBattery(&bat1);
+
+    runSimulation(30);
+
     return 0;
 }
 
 
 void setupSimulation(){
     motoboy.attachBattery(&batMoto);
-    motoboy.turnOn();
-    motoboy.throttle();
 
     etb.attachBatteryToCp(&bat1, 1);
     etb.attachBatteryToCp(&bat2, 2);
@@ -51,7 +83,9 @@ void setupSimulation(){
 
 void runSimulation(int timeInSeconds){
     for(int i = 0; i < timeInSeconds; i++){
-        if(totalTimeInSeconds % 10 == 0)
+        etb.automaticChargeControl();
+
+        if(totalTimeInSeconds % PRINT_INTERVAL == 0)
             printInformation();
 
         motoboy.update();

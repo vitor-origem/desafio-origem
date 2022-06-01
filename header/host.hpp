@@ -14,9 +14,9 @@ class Host{
     public:
         string getType(){return type;}
 
-        // Just declaring some methods to use in battery class
-        string getState(){return "";}
-        float getSpeed(){return 0;}
+        // Declaring some methods to use in battery class
+        virtual string getState(){return "";}
+        virtual float getSpeed(){return 0;}
 };
 
 #endif

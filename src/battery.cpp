@@ -48,13 +48,15 @@ Host * Battery::getHost(){    // Returns a pointer to the battery's host
 }
 
 void Battery::updateSoc(){      // Iterate one second in the simulation
+
     if(host->getType() == "Moto"){
         if(host->getState() == "Standby"){
             soc -= 0.01;
         }else{
-            soc -= (0.01 + 0.05*pow(host->getSpeed()/MAX_SPEED, 2));
+            float socDiff = 0.05*pow(host->getSpeed()/(float) MAX_SPEED, 2);
+            soc -= (0.01 + socDiff);
         }
-    }else if(host->getType() == "ETB"){    // Verification if the CP is charging is done in ETB::update()
+    }else if(host->getType() == "ETB"){    // Verification if the CP is charging -> done in ETB::update()
         soc += 0.05;
     }
 

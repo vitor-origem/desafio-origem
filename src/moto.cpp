@@ -30,8 +30,10 @@ void Moto::attachBattery(Battery * batteryToAttach){
 }
 
 void Moto::detachBattery(){     // Detach the battery of the motorcycle
-    batteryAttached = false;
-    battery->detachHost();
+    if(state == "Standby"){
+        batteryAttached = false;
+        battery->detachHost();
+    }
     // TODO: alterar o estado da bateria para Idle
 }
 

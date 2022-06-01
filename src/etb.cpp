@@ -55,6 +55,7 @@ void ETB::stopChargeCp(int numCp){
 }
 
 void ETB::detachBatteryFromCp(int numCp){
+    cps.at(numCp-1).getBattery()->detachHost();
     cps.at(numCp-1).detachBattery();
 }
 
@@ -78,7 +79,7 @@ vector<CP> & ETB::getCps(){
 
 
 void ETB::update(){
-    automaticChargeControl();
+    //automaticChargeControl();
 
     for(auto cp = cps.begin(); cp != cps.end(); ++cp){
         if((*cp).hasBatteryAttached() && (*cp).getCharging() == "YES")
