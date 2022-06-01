@@ -29,11 +29,15 @@ void CP::stopCharge(){
     charging = false;
 }
 
-string CP::getCharging(){
+bool CP::getCharging(){
+    return charging;
+}
+
+string CP::getChargingStr(){
     if(charging)
         return "YES";
     else
-        return "NO";
+        return " NO";
 }
 
 bool CP::hasBatteryAttached(){

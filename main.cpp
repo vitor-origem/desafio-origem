@@ -22,7 +22,7 @@ Battery batMoto(1000, 85);
 Battery bat1(1001, 100), bat2(1002, 100), bat3(1003, 100);
 Battery bat4(1004, 70),  bat5(1005, 60),  bat6(1006, 50);
 
-Moto motoboy("123456789");
+Moto motoboy("ABC1234");
 
 ETB etb(123, 7);
 
@@ -105,13 +105,13 @@ void printInformation(){
     cout.precision(2);
     cout << fixed;
 
-    cout << "\n--------------------------\n\n";
+    cout << "\n----------------------------------------------------------------------------\n\n";
 
     cout << "Time: "; timestamp(totalTimeInSeconds); cout << "\n\n";
     
     cout << "Motorcycle plate: " << motoboy.getPlate() << "\n";
 
-    cout << "Speed: " << motoboy.getSpeed() << "\n";
+    cout << "Speed: " << motoboy.getSpeed() << " km/h\n";
 
     if(motoboy.hasBatteryAttached()){
         cout << "Attached battery UID: " << motoboy.getBattery()->getUid() << "\n";
@@ -133,13 +133,13 @@ void printInformation(){
         if((*cp).hasBatteryAttached()){
             cout << "CP " << cp_idx;
             cout << ": [Battery UID: " << (*cp).getBattery()->getUid();
-            cout << " | Battery SoC: " << (*cp).getBattery()->getSoc();
-            cout << " | Charging: " << (*cp).getCharging();
+            cout << " | Battery SoC: "; printf("%6.2f", (*cp).getBattery()->getSoc());
+            cout << " | Charging: " << (*cp).getChargingStr();
             cout << " | ETC: "; timestamp(etb.timeLeftCharging(cp_idx)); cout << "]\n";
         }else{
             cout << "CP " << cp_idx;
-            cout << ": [Battery UID: NONE | Battery SoC: NONE | Charging: " <<  (*cp).getCharging();
-            cout << " | ETC: NONE]\n";
+            cout << ": [Battery UID: NONE | Battery SoC:   NONE | Charging: " <<  (*cp).getChargingStr();
+            cout << " | ETC:  NONE]\n";
         }
     }
 }

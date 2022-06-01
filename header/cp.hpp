@@ -23,7 +23,8 @@ class CP{
         void startCharge();
         void stopCharge();
 
-        string getCharging();
+        bool getCharging();
+        string getChargingStr();
         bool hasBatteryAttached();
         Battery * getBattery();
 };

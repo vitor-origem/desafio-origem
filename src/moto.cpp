@@ -7,8 +7,14 @@
 using namespace std;
 
 Moto::Moto(string newPlate){
-    type = "Moto";
-    plate = newPlate;
+    if(newPlate.size() != 7){    // Guarantees the maximum length of 7
+        cout << "Deu ruim." << "\n";
+        throw runtime_error("Atributo plate deve possuir 7 caracteres.");
+    }else{
+        type = "Moto";
+        plate = newPlate;
+        cout << "Deu certo." << "\n";
+    }
 }
 
 void Moto::turnOn(){    // Turn the motorcycle on

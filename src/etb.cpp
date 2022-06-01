@@ -31,7 +31,7 @@ int ETB::getNumCharging(){
     int numCharging = 0;
 
     for(auto cp = cps.begin(); cp != cps.end(); ++cp){
-        if((*cp).getCharging() == "YES")
+        if((*cp).getCharging())
             numCharging++;
     }
 
@@ -82,7 +82,7 @@ void ETB::update(){
     //automaticChargeControl();
 
     for(auto cp = cps.begin(); cp != cps.end(); ++cp){
-        if((*cp).hasBatteryAttached() && (*cp).getCharging() == "YES")
+        if((*cp).hasBatteryAttached() && (*cp).getCharging())
             (*cp).getBattery()->updateSoc();
     }
 }
@@ -92,7 +92,7 @@ void ETB::automaticChargeControl(){
     for(auto cp = cps.begin(); cp != cps.end(); ++cp){
         cp_idx++;
 
-        if((*cp).hasBatteryAttached() && (*cp).getCharging() == "NO"){
+        if((*cp).hasBatteryAttached() && !(*cp).getCharging()){
             if((*cp).getBattery()->getSoc() < 100 && this->getNumCharging() < MAX_CPS_CHARGING)
                 startChargeCp(cp_idx);
         }
@@ -102,7 +102,7 @@ void ETB::automaticChargeControl(){
     for(auto cp = cps.begin(); cp != cps.end(); ++cp){
         cp_idx++;
 
-        if((*cp).hasBatteryAttached() && (*cp).getCharging() == "YES"){
+        if((*cp).hasBatteryAttached() && (*cp).getCharging()){
             if((*cp).getBattery()->getSoc() == 100)
                 stopChargeCp(cp_idx);
         }
