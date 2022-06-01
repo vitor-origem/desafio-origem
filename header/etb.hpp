@@ -9,12 +9,13 @@
 #include "../header/moto.hpp"
 #include "../header/etb.hpp"
 #include "../header/cp.hpp"
+#include "../header/host.hpp"
 
 using namespace std;
 
 #define MAX_CPS_CHARGING 6
 
-class ETB{
+class ETB : public Host{
     private:
         long int uid;
         vector<CP> cps;

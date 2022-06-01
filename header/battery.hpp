@@ -9,40 +9,43 @@
 #include "../header/battery.hpp"
 #include "../header/cp.hpp"
 #include "../header/etb.hpp"
+#include "../header/host.hpp"
 
 using namespace std;
 
-union host_t{   // Host type (can either be a motorcycle or an ETB)
+// Host type (can either be a motorcycle or an ETB | string is for constructor only)
+// TODO: implementar o Host como classe, sendo Moto e ETB duas filhas
+/*union host_t{   
     Moto moto;
     ETB etb;
     string name;
     host_t(){name = "None";}
     ~host_t(){}
-};
+};*/
 
 class Battery{
     private:
         long long int uid;
         float soc;
-        host_t host;
+        Host host;
 
-        string hostAttached;    // Indicates if there is a host attached
+        bool hostAttached;    // Indicates if there is a host attached
 
     public:
         Battery();
         Battery(long long int uid, float soc);
 
-        void attachMoto(Moto moto);
-        void attachETB(ETB etb);
+        void attachHost(Host hostToAttach);
         void detachHost();
 
         long long int getUid();
         float getSoc();
-        host_t * getHost();
+        Host getHost();
+        bool hasHostAttached();
 
         void updateSoc();
 
-        void operator = (const Battery &B){
+        /*void operator = (const Battery &B){
             uid = B.uid;
             soc = B.soc;
             if(hostAttached == "Moto")
@@ -50,7 +53,7 @@ class Battery{
             else if(hostAttached == "ETB")
                 host.moto = B.host.moto;
             hostAttached = B.hostAttached;
-        }
+        }*/
 };
 
 #endif

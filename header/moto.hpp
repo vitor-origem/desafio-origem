@@ -11,10 +11,11 @@
 #include "../header/battery.hpp"
 #include "../header/cp.hpp"
 #include "../header/etb.hpp"
+#include "../header/host.hpp"
 
 using namespace std;
 
-class Moto{
+class Moto : public Host{
     private:
         string plate;       // "Unique" id of the motorcycle
         float speed;

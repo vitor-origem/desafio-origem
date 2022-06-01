@@ -9,6 +9,7 @@
 using namespace std;
 
 Moto::Moto(string newPlate){
+    type = "Motorcycle";
     plate = plate;
 }
 
