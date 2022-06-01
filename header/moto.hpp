@@ -43,7 +43,7 @@ class Moto : public Host{
         void increaseSpeed();
         void reduceSpeed();
 
-        void updateSpeed();
+        void update();
 };
 
 #endif

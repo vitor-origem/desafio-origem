@@ -54,7 +54,12 @@ void Battery::updateSoc(){      // Iterate one second in the simulation
         }else{
             soc -= (0.01 + 0.05*pow(host->getSpeed()/MAX_SPEED, 2));
         }
-    }else if(host->getType() == "ETB"){    // Add verification if the CP is actually charging the battery
+    }else if(host->getType() == "ETB"){    // Verification if the CP is charging is done in ETB::update()
         soc += 0.05;
     }
+
+    if(soc > 100)
+        soc = 100;
+    else if(soc < 0)
+        soc = 0;
 }

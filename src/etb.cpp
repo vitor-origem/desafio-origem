@@ -47,20 +47,20 @@ void ETB::attachBatteryToCp(Battery * battery, int numCp){
 
 void ETB::startChargeCp(int numCp){
     if(this->getNumCharging() < MAX_CPS_CHARGING)
-        cps.at(numCp).startCharge();
+        cps.at(numCp-1).startCharge();
 }
 
 void ETB::stopChargeCp(int numCp){
-    cps.at(numCp).stopCharge();
+    cps.at(numCp-1).stopCharge();
 }
 
 void ETB::detachBatteryFromCp(int numCp){
-    cps.at(numCp).detachBattery();
+    cps.at(numCp-1).detachBattery();
 }
 
 int ETB::timeLeftCharging(int numCp){
-    if(cps.at(numCp).hasBatteryAttached()){
-        float batterySoc = cps.at(numCp).getBattery()->getSoc();
+    if(cps.at(numCp-1).hasBatteryAttached()){
+        float batterySoc = cps.at(numCp-1).getBattery()->getSoc();
         return (100 - batterySoc)*20;  // time in seconds needed to complete the charge of the battery
     }else{
         return 0;   // no battery attached to the corresponding CP
@@ -74,4 +74,36 @@ long int ETB::getUid(){
 
 vector<CP> & ETB::getCps(){
     return cps;
+}
+
+
+void ETB::update(){
+    automaticChargeControl();
+
+    for(auto cp = cps.begin(); cp != cps.end(); ++cp){
+        if((*cp).hasBatteryAttached() && (*cp).getCharging() == "YES")
+            (*cp).getBattery()->updateSoc();
+    }
+}
+
+void ETB::automaticChargeControl(){
+    int cp_idx = 0;
+    for(auto cp = cps.begin(); cp != cps.end(); ++cp){
+        cp_idx++;
+
+        if((*cp).hasBatteryAttached() && (*cp).getCharging() == "NO"){
+            if((*cp).getBattery()->getSoc() < 100 && this->getNumCharging() < MAX_CPS_CHARGING)
+                startChargeCp(cp_idx);
+        }
+    }
+
+    cp_idx = 0;
+    for(auto cp = cps.begin(); cp != cps.end(); ++cp){
+        cp_idx++;
+
+        if((*cp).hasBatteryAttached() && (*cp).getCharging() == "YES"){
+            if((*cp).getBattery()->getSoc() == 100)
+                stopChargeCp(cp_idx);
+        }
+    }
 }

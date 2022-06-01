@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cstdio>
 
 #include "header/battery.hpp"
 #include "header/cp.hpp"
@@ -39,14 +40,13 @@ void setupSimulation(){
     motoboy.attachBattery(&batMoto);
     motoboy.turnOn();
     motoboy.throttle();
+
     etb.attachBatteryToCp(&bat1, 1);
     etb.attachBatteryToCp(&bat2, 2);
     etb.attachBatteryToCp(&bat3, 3);
     etb.attachBatteryToCp(&bat4, 4);
     etb.attachBatteryToCp(&bat5, 5);
     etb.attachBatteryToCp(&bat6, 6);
-
-    etb.startChargeCp(3);
 }
 
 void runSimulation(int timeInSeconds){
@@ -54,16 +54,8 @@ void runSimulation(int timeInSeconds){
         if(totalTimeInSeconds % 10 == 0)
             printInformation();
 
-        motoboy.updateSpeed();
-
-        batMoto.updateSoc();
-
-        bat1.updateSoc();
-        bat2.updateSoc();
-        bat3.updateSoc();
-        bat4.updateSoc();
-        bat5.updateSoc();
-        bat6.updateSoc();
+        motoboy.update();
+        etb.update();
 
         totalTimeInSeconds++;
     }
@@ -72,19 +64,17 @@ void runSimulation(int timeInSeconds){
 void timestamp(int timeInSeconds){
     int minutes = timeInSeconds / 60;
     int seconds = timeInSeconds - minutes*60;
-    cout << "Time: " <<minutes << ":" << seconds << "\n\n";
+    printf("%02d:%02d", minutes, seconds);
 }
 
 void printInformation(){
     cout.precision(2);
     cout << fixed;
 
-    cout << motoboy.getType() << "\n";
-
     cout << "\n--------------------------\n\n";
 
-    timestamp(totalTimeInSeconds);
-
+    cout << "Time: "; timestamp(totalTimeInSeconds); cout << "\n\n";
+    
     cout << "Motorcycle plate: " << motoboy.getPlate() << "\n";
 
     cout << "Speed: " << motoboy.getSpeed() << "\n";
@@ -97,7 +87,9 @@ void printInformation(){
         cout << "Motorcycle battery SoC: None\n\n";
     }
 
-    cout << "ETB ID: " << etb.getUid() << "\n";
+    cout << "ETB ID: " << etb.getUid();
+    cout << " | Num Batteries: " << etb.getNumBatteries();
+    cout << " | Num Charging: " << etb.getNumCharging() << "\n";
 
     int cp_idx = 0;
 
@@ -105,9 +97,15 @@ void printInformation(){
         cp_idx++;
 
         if((*cp).hasBatteryAttached()){
-            cout << "CP " << cp_idx << ": [Battery UID: " << (*cp).getBattery()->getUid() << " | Battery SoC: " << (*cp).getBattery()->getSoc() << " | Charging: " << (*cp).getCharging() << "]\n";
+            cout << "CP " << cp_idx;
+            cout << ": [Battery UID: " << (*cp).getBattery()->getUid();
+            cout << " | Battery SoC: " << (*cp).getBattery()->getSoc();
+            cout << " | Charging: " << (*cp).getCharging();
+            cout << " | ETC: "; timestamp(etb.timeLeftCharging(cp_idx)); cout << "]\n";
         }else{
-            cout << "CP " << cp_idx << ": [Battery UID: NONE | Battery SoC: NONE | Charging: " <<  (*cp).getCharging() << "]\n";
+            cout << "CP " << cp_idx;
+            cout << ": [Battery UID: NONE | Battery SoC: NONE | Charging: " <<  (*cp).getCharging();
+            cout << " | ETC: NONE]\n";
         }
     }
 }

@@ -31,6 +31,9 @@ class ETB : public Host{
         
         long int getUid();
         vector<CP> & getCps();
+
+        void update();
+        void automaticChargeControl();
 };
 
 #endif

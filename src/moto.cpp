@@ -12,7 +12,8 @@ Moto::Moto(string newPlate){
 }
 
 void Moto::turnOn(){    // Turn the motorcycle on
-    state = "On";
+    if(batteryAttached && battery->getSoc() > 0)
+        state = "On";
 }
 
 void Moto::turnOff(){   // Turn the motorcycle off
@@ -69,7 +70,8 @@ bool Moto::hasBatteryAttached(){
 }
 
 void Moto::increaseSpeed(){     // Increase the motorcycle's speed
-    speed += 0.2;
+    if(battery->getSoc() > 0)
+        speed += 0.2;
 
     if(speed > MAX_SPEED)
         speed = MAX_SPEED;
@@ -82,10 +84,13 @@ void Moto::reduceSpeed(){       // Decrease the motorcycle's speed
         speed = 0;
 }
 
-void Moto::updateSpeed(){     // Iterate one second in the simulation
+void Moto::update(){     // Iterate one second in the simulation
     if(brakeOn){
         reduceSpeed();
     }else if(throttleOn){
         increaseSpeed();
     }   // If neither brake or throttle are on, the speed stays the same
+
+    if(batteryAttached)
+        battery->updateSoc();
 }
