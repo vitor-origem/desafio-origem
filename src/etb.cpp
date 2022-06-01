@@ -2,8 +2,6 @@
 #include <string>
 #include <vector>
 
-#include "../header/moto.hpp"
-#include "../header/battery.hpp"
 #include "../header/cp.hpp"
 #include "../header/etb.hpp"
 
@@ -23,6 +21,8 @@ int ETB::getNumBatteries(){
         if((*cp).getBatteryAttached())
             numBatteries++;
     }
+
+    return numBatteries;
 }
 
 int ETB::getNumCharging(){
@@ -32,9 +32,11 @@ int ETB::getNumCharging(){
         if((*cp).getCharging() == "YES")
             numCharging++;
     }
+
+    return numCharging;
 }
 
-void ETB::attachBatteryToCp(Battery * battery, int numCp){
+void ETB::attachBatteryToCp(Battery battery, int numCp){
     cps.at(numCp-1).attachBattery(battery);
 }
 
@@ -53,8 +55,8 @@ void ETB::detachBatteryFromCp(int numCp){
 
 int ETB::timeLeftCharging(int numCp){
     if(cps.at(numCp).getBatteryAttached()){
-        float batterySoc = cps.at(numCp).getBattery()->getSoc();
-        return (100 - batterySoc)/0.05;  // time in seconds needed to complete the charge of the battery
+        float batterySoc = cps.at(numCp).getBattery().getSoc();
+        return (100 - batterySoc)*20;  // time in seconds needed to complete the charge of the battery
     }else{
         return 0;   // no battery attached to the corresponding CP
     }

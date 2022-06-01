@@ -2,9 +2,9 @@
 #include <string>
 #include <vector>
 
-#include "header/moto.hpp"
 #include "header/battery.hpp"
 #include "header/cp.hpp"
+#include "header/moto.hpp"
 #include "header/etb.hpp"
 
 // TODO: quando finalizar o carregamento de uma bateria deve-se automaticamente
@@ -25,14 +25,40 @@ Moto motoboy("Motoboy123456");
 
 ETB etb(123, 7);
 
+int totalTimeInSeconds = 0;
+
+int main(){
+    setupSimulation();
+    runSimulation(50);
+    return 0;
+}
+
 
 void setupSimulation(){
-    etb.attachBatteryToCp(&bat1, 1);
-    etb.attachBatteryToCp(&bat2, 2);
-    etb.attachBatteryToCp(&bat3, 3);
-    etb.attachBatteryToCp(&bat4, 4);
-    etb.attachBatteryToCp(&bat5, 5);
-    etb.attachBatteryToCp(&bat6, 6);
+    etb.attachBatteryToCp(bat1, 1);
+    etb.attachBatteryToCp(bat2, 2);
+    etb.attachBatteryToCp(bat3, 3);
+    etb.attachBatteryToCp(bat4, 4);
+    etb.attachBatteryToCp(bat5, 5);
+    etb.attachBatteryToCp(bat6, 6);
+}
+
+void runSimulation(int timeInSeconds){
+    for(int i = 0; i < timeInSeconds; i++){
+        if(totalTimeInSeconds % 10 == 0)
+            printInformation();
+
+        motoboy.updateSpeed();
+        batMoto.updateSoc();
+        bat1.updateSoc();
+        bat2.updateSoc();
+        bat3.updateSoc();
+        bat4.updateSoc();
+        bat5.updateSoc();
+        bat6.updateSoc();
+
+        totalTimeInSeconds++;
+    }
 }
 
 void printInformation(){
@@ -52,11 +78,12 @@ void printInformation(){
     cout << "ETB ID: " << etb.getUid() << "\n";
 
     int cp_idx = 1;
+
     for(auto cp = etb.getCps().begin(); cp != etb.getCps().end(); ++cp){
         cp_idx++;
 
         if((*cp).getBatteryAttached()){
-            cout << "CP " << cp_idx << ": [" << (*cp).getBattery()->getUid() << " | " << (*cp).getBattery()->getSoc() << " | " << (*cp).getCharging() << "]\n";
+            cout << "CP " << cp_idx << ": [" << (*cp).getBattery().getUid() << " | " << (*cp).getBattery().getSoc() << " | " << (*cp).getCharging() << "]\n";
         }else{
             cout << "CP " << cp_idx << ": [ NONE | NONE | " <<  (*cp).getCharging() << "]\n";
         }

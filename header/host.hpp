@@ -4,15 +4,6 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
-
-#include "../header/moto.hpp"
-#include "../header/battery.hpp"
-#include "../header/cp.hpp"
-#include "../header/etb.hpp"
-
-// TODO: quando finalizar o carregamento de uma bateria deve-se automaticamente
-// desligar o charging do CP e outras condições
 
 using namespace std;
 
@@ -24,8 +15,8 @@ class Host{
         string getType(){return type;}
 
         // Just declaring some methods to use in battery class
-        string getState();
-        float getSpeed();
+        string getState(){return "";}
+        float getSpeed(){return 0;}
 };
 
 #endif

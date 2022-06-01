@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\vitor\Documents\Desk\Arquivos\Projetos\desafio-origem\desafio-origem\build\CMakeFiles\a1dc12b58132c9c0ebd916f36c3724d4\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{DBDCA11D-AEDE-3FBB-80B6-17DD15F1A301}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -5,8 +5,7 @@
 #include <iostream>
 #include <string>
 
-#include "../header/moto.hpp"
-#include "../header/etb.hpp"
+#include "../header/battery.hpp"
 
 using namespace std;
 
@@ -18,16 +17,15 @@ class CP{
 
     public:
         CP();
-        CP(Battery * newBattery);
 
-        void attachBattery(Battery * batteryToAttach);
+        void attachBattery(Battery batteryToAttach);
         void detachBattery();
         void startCharge();
         void stopCharge();
 
         string getCharging();
         bool getBatteryAttached();
-        Battery * getBattery();
+        Battery getBattery();
 };
 
 #endif

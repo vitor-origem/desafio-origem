@@ -2,7 +2,6 @@
 #include <string>
 
 #include "../header/battery.hpp"
-#include "../header/moto.hpp"
 #include "../header/cp.hpp"
 
 using namespace std;
@@ -12,15 +11,9 @@ CP::CP(){
     batteryAttached = false;
 }
 
-CP::CP(Battery * newBattery){
-    attachBattery(newBattery);
-    charging = false;
-    batteryAttached = false;
-}
-
-void CP::attachBattery(Battery * batteryToAttach){
+void CP::attachBattery(Battery batteryToAttach){
     if(!batteryAttached){
-        battery = *batteryToAttach;
+        battery = batteryToAttach;
         batteryAttached = true;
     }
 }
@@ -48,6 +41,6 @@ bool CP::getBatteryAttached(){
     return batteryAttached;
 }
 
-Battery * CP::getBattery(){
-    return &battery;
+Battery CP::getBattery(){
+    return battery;
 }

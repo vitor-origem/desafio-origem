@@ -7,11 +7,8 @@
 #include <iostream>
 #include <string>
 
-#include "../header/moto.hpp"
-#include "../header/battery.hpp"
-#include "../header/cp.hpp"
-#include "../header/etb.hpp"
 #include "../header/host.hpp"
+#include "../header/battery.hpp"
 
 using namespace std;
 

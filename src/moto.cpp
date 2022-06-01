@@ -3,8 +3,6 @@
 
 #include "../header/moto.hpp"
 #include "../header/battery.hpp"
-#include "../header/cp.hpp"
-#include "../header/etb.hpp"
 
 using namespace std;
 

@@ -6,10 +6,9 @@
 #include <string>
 #include <vector>
 
-#include "../header/moto.hpp"
-#include "../header/etb.hpp"
-#include "../header/cp.hpp"
 #include "../header/host.hpp"
+#include "../header/cp.hpp"
+#include "../header/battery.hpp"
 
 using namespace std;
 
@@ -22,7 +21,7 @@ class ETB : public Host{
     public:
         ETB(long int newUid, int numCps);
 
-        void attachBatteryToCp(Battery * battery, int numCp);
+        void attachBatteryToCp(Battery battery, int numCp);
         void startChargeCp(int numCp);
         void stopChargeCp(int numCp);
         void detachBatteryFromCp(int numCp);

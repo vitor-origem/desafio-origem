@@ -2,10 +2,9 @@
 #include <string>
 #include <cmath>
 
-#include "../header/moto.hpp"
 #include "../header/battery.hpp"
-#include "../header/cp.hpp"
-#include "../header/etb.hpp"
+#include "../header/host.hpp"
+#include "../header/moto.hpp"
 
 using namespace std;
 
