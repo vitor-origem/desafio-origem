@@ -20,7 +20,7 @@ int ETB::getNumBatteries(){
     int numBatteries = 0;
 
     for(auto cp = cps.begin(); cp != cps.end(); ++cp){
-        if((*cp).getBatteryAttached())
+        if((*cp).hasBatteryAttached())
             numBatteries++;
     }
 
@@ -38,8 +38,11 @@ int ETB::getNumCharging(){
     return numCharging;
 }
 
-void ETB::attachBatteryToCp(Battery battery, int numCp){
-    cps.at(numCp-1).attachBattery(battery);
+void ETB::attachBatteryToCp(Battery * battery, int numCp){
+    if(!battery->hasHostAttached() && !cps.at(numCp-1).hasBatteryAttached()){
+        cps.at(numCp-1).attachBattery(battery);
+        battery->attachHost(this);
+    }
 }
 
 void ETB::startChargeCp(int numCp){
@@ -56,8 +59,8 @@ void ETB::detachBatteryFromCp(int numCp){
 }
 
 int ETB::timeLeftCharging(int numCp){
-    if(cps.at(numCp).getBatteryAttached()){
-        float batterySoc = cps.at(numCp).getBattery().getSoc();
+    if(cps.at(numCp).hasBatteryAttached()){
+        float batterySoc = cps.at(numCp).getBattery()->getSoc();
         return (100 - batterySoc)*20;  // time in seconds needed to complete the charge of the battery
     }else{
         return 0;   // no battery attached to the corresponding CP

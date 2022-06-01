@@ -36,14 +36,17 @@ int main(){
 
 
 void setupSimulation(){
-    motoboy.attachBattery(batMoto);
+    motoboy.attachBattery(&batMoto);
+    motoboy.turnOn();
     motoboy.throttle();
-    etb.attachBatteryToCp(bat1, 1);
-    etb.attachBatteryToCp(bat2, 2);
-    etb.attachBatteryToCp(bat3, 3);
-    etb.attachBatteryToCp(bat4, 4);
-    etb.attachBatteryToCp(bat5, 5);
-    etb.attachBatteryToCp(bat6, 6);
+    etb.attachBatteryToCp(&bat1, 1);
+    etb.attachBatteryToCp(&bat2, 2);
+    etb.attachBatteryToCp(&bat3, 3);
+    etb.attachBatteryToCp(&bat4, 4);
+    etb.attachBatteryToCp(&bat5, 5);
+    etb.attachBatteryToCp(&bat6, 6);
+
+    etb.startChargeCp(3);
 }
 
 void runSimulation(int timeInSeconds){
@@ -52,7 +55,9 @@ void runSimulation(int timeInSeconds){
             printInformation();
 
         motoboy.updateSpeed();
+
         batMoto.updateSoc();
+
         bat1.updateSoc();
         bat2.updateSoc();
         bat3.updateSoc();
@@ -74,6 +79,8 @@ void printInformation(){
     cout.precision(2);
     cout << fixed;
 
+    cout << motoboy.getType() << "\n";
+
     cout << "\n--------------------------\n\n";
 
     timestamp(totalTimeInSeconds);
@@ -82,7 +89,7 @@ void printInformation(){
 
     cout << "Speed: " << motoboy.getSpeed() << "\n";
 
-    if(motoboy.getBatteryAttached()){
+    if(motoboy.hasBatteryAttached()){
         cout << "Attached battery UID: " << motoboy.getBattery()->getUid() << "\n";
         cout << "Motorcycle battery SoC: " << motoboy.getBattery()->getSoc() << "%\n\n";
     }else{
@@ -97,8 +104,8 @@ void printInformation(){
     for(auto cp = etb.getCps().begin(); cp != etb.getCps().end(); ++cp){
         cp_idx++;
 
-        if((*cp).getBatteryAttached()){
-            cout << "CP " << cp_idx << ": [Battery UID: " << (*cp).getBattery().getUid() << " | Battery SoC: " << (*cp).getBattery().getSoc() << " | Charging: " << (*cp).getCharging() << "]\n";
+        if((*cp).hasBatteryAttached()){
+            cout << "CP " << cp_idx << ": [Battery UID: " << (*cp).getBattery()->getUid() << " | Battery SoC: " << (*cp).getBattery()->getSoc() << " | Charging: " << (*cp).getCharging() << "]\n";
         }else{
             cout << "CP " << cp_idx << ": [Battery UID: NONE | Battery SoC: NONE | Charging: " <<  (*cp).getCharging() << "]\n";
         }

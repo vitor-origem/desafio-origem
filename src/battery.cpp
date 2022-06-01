@@ -24,7 +24,7 @@ bool Battery::hasHostAttached(){
     return hostAttached;
 }
 
-void Battery::attachHost(Host hostToAttach){    // Attach a motorcycle as the battery's host
+void Battery::attachHost(Host * hostToAttach){    // Attach a motorcycle as the battery's host
     if(!hostAttached){
         hostAttached = true;
         host = hostToAttach;
@@ -43,18 +43,18 @@ float Battery::getSoc(){    // Get the battery's state of charge
     return soc;
 }
 
-Host Battery::getHost(){    // Returns a pointer to the battery's host
+Host * Battery::getHost(){    // Returns a pointer to the battery's host
     return host;
 }
 
 void Battery::updateSoc(){      // Iterate one second in the simulation
-    if(host.getType() == "Moto"){
-        if(host.getState() == "Standby"){
+    if(host->getType() == "Moto"){
+        if(host->getState() == "Standby"){
             soc -= 0.01;
         }else{
-            soc -= (0.01 + 0.05*pow(host.getSpeed()/MAX_SPEED, 2));
+            soc -= (0.01 + 0.05*pow(host->getSpeed()/MAX_SPEED, 2));
         }
-    }else if(host.getType() == "ETB"){    // Add verification if the CP is actually charging the battery
+    }else if(host->getType() == "ETB"){    // Add verification if the CP is actually charging the battery
         soc += 0.05;
     }
 }

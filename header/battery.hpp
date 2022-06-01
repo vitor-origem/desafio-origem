@@ -14,7 +14,7 @@ class Battery{
     private:
         long long int uid;
         float soc;
-        Host host;
+        Host * host;
 
         bool hostAttached;    // Indicates if there is a host attached
 
@@ -22,12 +22,12 @@ class Battery{
         Battery();
         Battery(long long int uid, float soc);
 
-        void attachHost(Host hostToAttach);
+        void attachHost(Host * hostToAttach);
         void detachHost();
 
         long long int getUid();
         float getSoc();
-        Host getHost();
+        Host * getHost();
         bool hasHostAttached();
 
         void updateSoc();

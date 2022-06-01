@@ -3,6 +3,7 @@
 
 #include "../header/battery.hpp"
 #include "../header/cp.hpp"
+#include "../header/etb.hpp"
 
 using namespace std;
 
@@ -11,11 +12,9 @@ CP::CP(){
     batteryAttached = false;
 }
 
-void CP::attachBattery(Battery batteryToAttach){
-    if(!batteryAttached){
-        battery = batteryToAttach;
-        batteryAttached = true;
-    }
+void CP::attachBattery(Battery * batteryToAttach){
+    battery = batteryToAttach;  // ETB will verify if CP and battery are available
+    batteryAttached = true;
 }
 
 void CP::detachBattery(){
@@ -37,10 +36,10 @@ string CP::getCharging(){
         return "NO";
 }
 
-bool CP::getBatteryAttached(){
+bool CP::hasBatteryAttached(){
     return batteryAttached;
 }
 
-Battery CP::getBattery(){
+Battery * CP::getBattery(){
     return battery;
 }

@@ -12,20 +12,20 @@ using namespace std;
 class CP{
     private:
         bool charging;
-        Battery battery;
+        Battery * battery;
         bool batteryAttached;
 
     public:
         CP();
 
-        void attachBattery(Battery batteryToAttach);
+        void attachBattery(Battery * batteryToAttach);
         void detachBattery();
         void startCharge();
         void stopCharge();
 
         string getCharging();
-        bool getBatteryAttached();
-        Battery getBattery();
+        bool hasBatteryAttached();
+        Battery * getBattery();
 };
 
 #endif

@@ -7,7 +7,7 @@
 using namespace std;
 
 Moto::Moto(string newPlate){
-    type = "Motorcycle";
+    type = "Moto";
     plate = newPlate;
 }
 
@@ -16,23 +16,26 @@ void Moto::turnOn(){    // Turn the motorcycle on
 }
 
 void Moto::turnOff(){   // Turn the motorcycle off
-    state = "Standby";
+    if(speed == 0)      // Motorcycle must be stopped to turn off
+        state = "Standby";
 }
 
-void Moto::attachBattery(Battery batteryToAttach){
-    if(!batteryAttached){
+void Moto::attachBattery(Battery * batteryToAttach){
+    if(!batteryAttached && !batteryToAttach->hasHostAttached()){
         battery = batteryToAttach;
         batteryAttached = true;
+        battery->attachHost(this);
     }
 }
 
 void Moto::detachBattery(){     // Detach the battery of the motorcycle
     batteryAttached = false;
+    battery->detachHost();
     // TODO: alterar o estado da bateria para Idle
 }
 
 void Moto::throttle(){  // Turn on the motorcycle's throttle
-    if(!brakeOn)
+    if(!brakeOn && state == "On")
         throttleOn = true;
 }
 
@@ -53,15 +56,15 @@ float Moto::getSpeed(){     // Get the speed of the motorcycle
     return speed;
 }
 
-Battery * Moto::getBattery(){   // Get the attached battery's UID
-    return &battery;
+Battery * Moto::getBattery(){   // Get the attached battery
+    return battery;
 }
 
 string Moto::getState(){    // Get the state of the motorcycle
     return state;
 }
 
-bool Moto::getBatteryAttached(){
+bool Moto::hasBatteryAttached(){
     return batteryAttached;
 }
 

@@ -16,7 +16,7 @@ class Moto : public Host{
     private:
         string plate;       // "Unique" id of the motorcycle
         float speed;
-        Battery battery;
+        Battery * battery;
 
         string state;           // Indicates if the motorcycle is on or standby
         bool batteryAttached;   // Indicates if there is any battery attached to the motorcycle
@@ -28,7 +28,7 @@ class Moto : public Host{
         
         void turnOn();
         void turnOff();
-        void attachBattery(Battery batteryToAttach);
+        void attachBattery(Battery * batteryToAttach);
         void detachBattery();
         void throttle();
         void brake();
@@ -38,7 +38,7 @@ class Moto : public Host{
         string getPlate();
         float getSpeed();
         Battery * Moto::getBattery();
-        bool getBatteryAttached();
+        bool hasBatteryAttached();
 
         void increaseSpeed();
         void reduceSpeed();
