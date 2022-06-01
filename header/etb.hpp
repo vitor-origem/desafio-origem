@@ -30,7 +30,7 @@ class ETB : public Host{
         int timeLeftCharging(int numCp);
         
         long int getUid();
-        vector<CP> getCps();
+        vector<CP> & getCps();
 };
 
 #endif

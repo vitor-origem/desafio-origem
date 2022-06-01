@@ -8,6 +8,8 @@
 using namespace std;
 
 ETB::ETB(long int newUid, int numCps){
+    type = "ETB";
+    
     uid = newUid;
     
     for(int i = 0; i < numCps; i++)
@@ -67,6 +69,6 @@ long int ETB::getUid(){
     return uid;
 }
 
-vector<CP> ETB::getCps(){
+vector<CP> & ETB::getCps(){
     return cps;
 }

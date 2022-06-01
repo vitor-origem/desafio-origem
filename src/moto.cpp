@@ -8,7 +8,7 @@ using namespace std;
 
 Moto::Moto(string newPlate){
     type = "Motorcycle";
-    plate = plate;
+    plate = newPlate;
 }
 
 void Moto::turnOn(){    // Turn the motorcycle on
@@ -19,9 +19,9 @@ void Moto::turnOff(){   // Turn the motorcycle off
     state = "Standby";
 }
 
-void Moto::attachBattery(Battery * batteryToAttach){
+void Moto::attachBattery(Battery batteryToAttach){
     if(!batteryAttached){
-        battery = *batteryToAttach;
+        battery = batteryToAttach;
         batteryAttached = true;
     }
 }

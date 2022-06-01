@@ -15,6 +15,7 @@ using namespace std;
 void setupSimulation();
 void runSimulation(int timeInSeconds);
 void printInformation();
+void timestamp(int timeInSeconds);
 
 // Create variables used in the simulation
 Battery batMoto(1000, 85);
@@ -35,6 +36,8 @@ int main(){
 
 
 void setupSimulation(){
+    motoboy.attachBattery(batMoto);
+    motoboy.throttle();
     etb.attachBatteryToCp(bat1, 1);
     etb.attachBatteryToCp(bat2, 2);
     etb.attachBatteryToCp(bat3, 3);
@@ -61,10 +64,22 @@ void runSimulation(int timeInSeconds){
     }
 }
 
+void timestamp(int timeInSeconds){
+    int minutes = timeInSeconds / 60;
+    int seconds = timeInSeconds - minutes*60;
+    cout << "Time: " <<minutes << ":" << seconds << "\n\n";
+}
+
 void printInformation(){
     cout.precision(2);
+    cout << fixed;
+
+    cout << "\n--------------------------\n\n";
+
+    timestamp(totalTimeInSeconds);
 
     cout << "Motorcycle plate: " << motoboy.getPlate() << "\n";
+
     cout << "Speed: " << motoboy.getSpeed() << "\n";
 
     if(motoboy.getBatteryAttached()){
@@ -77,15 +92,15 @@ void printInformation(){
 
     cout << "ETB ID: " << etb.getUid() << "\n";
 
-    int cp_idx = 1;
+    int cp_idx = 0;
 
     for(auto cp = etb.getCps().begin(); cp != etb.getCps().end(); ++cp){
         cp_idx++;
 
         if((*cp).getBatteryAttached()){
-            cout << "CP " << cp_idx << ": [" << (*cp).getBattery().getUid() << " | " << (*cp).getBattery().getSoc() << " | " << (*cp).getCharging() << "]\n";
+            cout << "CP " << cp_idx << ": [Battery UID: " << (*cp).getBattery().getUid() << " | Battery SoC: " << (*cp).getBattery().getSoc() << " | Charging: " << (*cp).getCharging() << "]\n";
         }else{
-            cout << "CP " << cp_idx << ": [ NONE | NONE | " <<  (*cp).getCharging() << "]\n";
+            cout << "CP " << cp_idx << ": [Battery UID: NONE | Battery SoC: NONE | Charging: " <<  (*cp).getCharging() << "]\n";
         }
     }
 }

@@ -28,7 +28,7 @@ class Moto : public Host{
         
         void turnOn();
         void turnOff();
-        void attachBattery(Battery * batteryToAttach);
+        void attachBattery(Battery batteryToAttach);
         void detachBattery();
         void throttle();
         void brake();
