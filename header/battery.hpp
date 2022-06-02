@@ -13,10 +13,10 @@ using namespace std;
 class Battery{
     private:
         long long int uid;
-        float soc;
+        float soc;              // State of charge
         Host * host;
 
-        bool hostAttached;    // Indicates if there is a host attached
+        bool hostAttached;      // Indicates if there is a host attached
 
     public:
         Battery();
@@ -31,16 +31,6 @@ class Battery{
         bool hasHostAttached();
 
         void updateSoc();
-
-        /*void operator = (const Battery &B){
-            uid = B.uid;
-            soc = B.soc;
-            if(hostAttached == "Moto")
-                host.etb = B.host.etb;
-            else if(hostAttached == "ETB")
-                host.moto = B.host.moto;
-            hostAttached = B.hostAttached;
-        }*/
 };
 
 #endif

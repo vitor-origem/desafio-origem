@@ -11,7 +11,7 @@ using namespace std;
 
 class CP{
     private:
-        bool charging;
+        bool charging;          // Indicates if the CP is charging the battery
         Battery * battery;
         bool batteryAttached;
 

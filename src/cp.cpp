@@ -17,30 +17,30 @@ void CP::attachBattery(Battery * batteryToAttach){
     batteryAttached = true;
 }
 
-void CP::detachBattery(){
+void CP::detachBattery(){       // Detach the battery
     batteryAttached = false;
 }
 
-void CP::startCharge(){
+void CP::startCharge(){         // Start charging the associated battery
     charging = true;
 }
 
-void CP::stopCharge(){
+void CP::stopCharge(){          // Stop charging the associated battery
     charging = false;
 }
 
-bool CP::getCharging(){
+bool CP::getCharging(){         // Returns if the CP is charging
     return charging;
 }
 
-string CP::getChargingStr(){
+string CP::getChargingStr(){    // Returns if the CP is charging for print purposes
     if(charging)
         return "YES";
     else
         return " NO";
 }
 
-bool CP::hasBatteryAttached(){
+bool CP::hasBatteryAttached(){  // Returns if the CP has battery attached
     return batteryAttached;
 }
 

@@ -50,9 +50,9 @@ Host * Battery::getHost(){    // Returns a pointer to the battery's host
 void Battery::updateSoc(){      // Iterate one second in the simulation
 
     if(host->getType() == "Moto"){
-        if(host->getState() == "Standby"){
+        if(host->getState() == "Standby"){      // Motorcycle is off (standby mode)
             soc -= 0.01;
-        }else{
+        }else{                                  // Motorcycle is on (additional spent of charge)
             float socDiff = 0.05*pow(host->getSpeed()/(float) MAX_SPEED, 2);
             soc -= (0.01 + socDiff);
         }
@@ -60,6 +60,7 @@ void Battery::updateSoc(){      // Iterate one second in the simulation
         soc += 0.05;
     }
 
+    // Limits of the battery's charge
     if(soc > 100)
         soc = 100;
     else if(soc < 0)

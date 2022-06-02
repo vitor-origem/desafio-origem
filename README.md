@@ -43,40 +43,42 @@ As informações mostradas no console serão listadas a seguir:
 
 ### Moto
 
-- turnOn() e turnOff(): ligar e desligar a moto. Coloquei a limitação de só poder ligar se houver bateria com alguma carga, e só poder desligar se a moto estiver parada (velocidade = 0), a menos que bateria (sem carga) seja a causa do desligamento.
+- `turnOn() e turnOff()`: ligar e desligar a moto. Coloquei a limitação de só poder ligar se houver bateria com alguma carga, e só poder desligar se a moto estiver parada (velocidade = 0), a menos que bateria (sem carga) seja a causa do desligamento.
 
-- attachBattery() e detachBattery(): conectar ou desconectar a bateria da motocicleta. Para conectar, é necessário que não haja outra bateria na bicicleta e que a bateria não esteja conectada a outro Host. Para desconectar, a moto deve estar desligada.
+- `attachBattery() e detachBattery()`: conectar ou desconectar a bateria da motocicleta. Para conectar, é necessário que não haja outra bateria na bicicleta e que a bateria não esteja conectada a outro Host. Para desconectar, a moto deve estar desligada.
 
-- throttle(), brake() e releaseBrake(): acelerar, freiar ou soltar o freio da motocicleta. Para acelerar, é necessário que a moto esteja ligada, e isso só causará de fato um efeito na velocidade se houver carga na bateria. Quando o freio é apertado, automaticamente a aceleração é desligada.
+- `throttle(), brake() e releaseBrake()`: acelerar, freiar ou soltar o freio da motocicleta. Para acelerar, é necessário que a moto esteja ligada, e isso só causará de fato um efeito na velocidade se houver carga na bateria. Quando o freio é apertado, automaticamente a aceleração é desligada.
 
 - outros métodos são getters ou utilizados internamente na simulação.
 
 ### ETB
 
-- attachBatteryToCp() e detachBatteryFromCp(): conecta ou desconecta a bateria de um ponto de carga da ETB. Para conectar é necessário que o CP esteja livre e que a bateria não tenha Host ainda.
+- `attachBatteryToCp() e detachBatteryFromCp()`: conecta ou desconecta a bateria de um ponto de carga da ETB. Para conectar é necessário que o CP esteja livre e que a bateria não tenha Host ainda.
 
-- startChargeCp() e stopChargeCp(): inicia ou interrompe o carregamento de algum ponto de carga da ETB.
+- `startChargeCp() e stopChargeCp()`: inicia ou interrompe o carregamento de algum ponto de carga da ETB.
 
-- getNumBatteries(): retorna o número de baterias armazenadas na ETB.
+- `getNumBatteries()`: retorna o número de baterias armazenadas na ETB.
 
-- getNumCharging(): retorna o número de pontos de carga carregando baterias.
+- `getNumCharging()`: retorna o número de pontos de carga carregando baterias.
 
-- timeLeftCharging(): retorna o tempo em segundos que falta para terminar o carregamento da bateria de algum PC.
+- `timeLeftCharging()`: retorna o tempo em segundos que falta para terminar o carregamento da bateria de algum PC.
 
-- automaticChargeControl(): essa função liga e desliga automaticamente os pontos de carga a depender da carga das baterias.
+- `automaticChargeControl()`: essa função liga e desliga automaticamente os pontos de carga a depender da carga das baterias.
 
 - outros métodos são getters ou utilizados internamente na simulação.
 
 ### Bateria
 
-- attachHost() e detachHost(): conecta ou desconecta a bateria de algum Host, que pode ser uma Moto ou ETB.
+- `attachHost() e detachHost()`: conecta ou desconecta a bateria de algum Host, que pode ser uma Moto ou ETB.
 
-- updateSoc(): atualiza a carga da bateria a depender do Host e das condições da simulação.
+- `updateSoc()`: atualiza a carga da bateria a depender do Host e das condições da simulação.
 
 - outros métodos são getters ou utilizados internamente na simulação.
 
 ### CP
 
-- attachBattery() e detachBattery(): conecta ou desconecta a bateria do CP.
+- `attachBattery() e detachBattery()`: conecta ou desconecta a bateria do CP.
 
-- startCharge() e stopCharge(): liga ou desliga o carregamento no ponto de carga.
+- `startCharge() e stopCharge()`: liga ou desliga o carregamento no ponto de carga.
+
+- outros métodos são getters ou utilizados internamente na simulação.

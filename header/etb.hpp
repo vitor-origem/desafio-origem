@@ -17,7 +17,7 @@ using namespace std;
 class ETB : public Host{
     private:
         long int uid;
-        vector<CP> cps;
+        vector<CP> cps;     // CPs in the ETB
     public:
         ETB(long int newUid, int numCps);
 
