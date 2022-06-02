@@ -13,6 +13,8 @@ Moto::Moto(string newPlate){
     }else{
         type = "Moto";
         plate = newPlate;
+        odometer = 0;
+        speed = 0;
         cout << "Deu certo." << "\n";
     }
 }
@@ -23,7 +25,7 @@ void Moto::turnOn(){    // Turn the motorcycle on
 }
 
 void Moto::turnOff(){   // Turn the motorcycle off
-    if(speed == 0)      // Motorcycle must be stopped to turn off
+    if(speed == 0 || battery->getSoc() <= 0)      // Motorcycle must be stopped to turn off
         state = "Standby";
 }
 
@@ -36,7 +38,7 @@ void Moto::attachBattery(Battery * batteryToAttach){
 }
 
 void Moto::detachBattery(){     // Detach the battery of the motorcycle
-    if(state == "Standby"){
+    if(state == "Standby" && batteryAttached){
         batteryAttached = false;
         battery->detachHost();
     }
@@ -63,6 +65,10 @@ string Moto::getPlate(){    // Get the plate number of the motorcycle
 
 float Moto::getSpeed(){     // Get the speed of the motorcycle
     return speed;
+}
+
+float Moto::getOdometer(){
+    return odometer;
 }
 
 Battery * Moto::getBattery(){   // Get the attached battery
@@ -99,6 +105,12 @@ void Moto::update(){     // Iterate one second in the simulation
         increaseSpeed();
     }   // If neither brake or throttle are on, the speed stays the same
 
+    odometer += speed/3600.0;
+
     if(batteryAttached)
         battery->updateSoc();
+
+    if(battery->getSoc() <= 0){
+        turnOff();
+    }
 }

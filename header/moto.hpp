@@ -14,9 +14,10 @@ using namespace std;
 
 class Moto : public Host{
     private:
-        string plate;       // "Unique" id of the motorcycle
+        string plate;           // "Unique" id of the motorcycle
         float speed;
-        Battery * battery;
+        Battery * battery;      // Unique battery of the motorcycle
+        float odometer;
 
         string state;           // Indicates if the motorcycle is on or standby
         bool batteryAttached;   // Indicates if there is any battery attached to the motorcycle
@@ -37,6 +38,7 @@ class Moto : public Host{
         string getState();
         string getPlate();
         float getSpeed();
+        float getOdometer();
         Battery * Moto::getBattery();
         bool hasBatteryAttached();
 

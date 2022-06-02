@@ -113,6 +113,8 @@ void printInformation(){
 
     cout << "Speed: " << motoboy.getSpeed() << " km/h\n";
 
+    cout << "Odometer: " << motoboy.getOdometer() << " km\n";
+
     if(motoboy.hasBatteryAttached()){
         cout << "Attached battery UID: " << motoboy.getBattery()->getUid() << "\n";
         cout << "Motorcycle battery SoC: " << motoboy.getBattery()->getSoc() << "%\n\n";
