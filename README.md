@@ -17,8 +17,8 @@ Depois disso, o executável estará no diretório `build/Debug`, com o nome `des
 
 ## Funcionalidades
 
-Primeiro, irei comentar sobre as informações que são impressas no console durante a simulação a cada `PRINT_INTERVAL` segundos, que pode ser alterado no código fonte.
-Irei separar as funcionalidades entre as quatro classes que representam os objetos no mundo real que será simulado. Estes são: moto, bateria, CP (ponto de carga) e ETB (estação de troca de bateria).
+Primeiro, irei comentar sobre as informações que são impressas no console durante a simulação a cada `PRINT_INTERVAL` segundos, que pode ser alterado no código fonte.  
+Depois, irei mostrar separadamente as funcionalidades das quatro classes que representam os objetos que serão simulados. Estes são: moto, bateria, CP (ponto de carga) e ETB (estação de troca de bateria).
 
 ### Prints no console
 
